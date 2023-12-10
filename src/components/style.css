@@ -1,0 +1,39 @@
+.gameBoard{
+    width: 320px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box{
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.box:nth-child(3n+1) {
+    border-left: 0;
+}
+
+.box:nth-child(-n+3) {
+    border-top: 0;
+}
+.box:nth-child(3n) {
+    border-right: 0;
+}
+
+.box:nth-child(7),.box:nth-child(8),.box:nth-child(9){
+    border-bottom: 0;
+}
+
+.game-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
