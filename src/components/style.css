@@ -31,9 +31,63 @@
     border-bottom: 0;
 }
 
+.box:hover{
+    background-color: #eee;
+}
+
+
 .game-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.player{
+    height: 300px;
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #f0e4e4;
+    box-shadow: 16px 12px 16px 12px darkgrey;
+
+}
+
+.playerContainer{
+    display: flex;
+    justify-content: center;
+    height: 512px;
+    align-items: center;
+}
+
+.player>input{
+    padding: 16px;
+    width: 200px;
+    border-radius: 24px;
+    text-align: center;
+    font-size: 18px;
+    font-family: cursive;
+}
+
+.player>button{
+    padding: 12px;
+    width: 130px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-family: cursive;
+    background-color: #e0f0e0;
+}
+
+.player>input:hover{
+    background-color: #eee;
+}
+
+
+.player>button:hover{
+    background-color: lightgreen;
 }
