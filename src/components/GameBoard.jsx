@@ -4,7 +4,8 @@ import "./style.css";
 let arr = Array(9).fill("");
 let totalMoves = 0;
 
-export default function GameBoard() {
+export default function GameBoard({ playerX, playerO }) {
+  console.log(playerX, playerO);
   let [turn, setTurn] = useState("X");
 
   function clicked(e) {
@@ -15,11 +16,11 @@ export default function GameBoard() {
       totalMoves++;
       let win = winner();
       if (win) {
-        win === "X" ? alert("Winner is X") : alert("Winner is O");
+        win === "X"
+          ? alert(`Winner is ${playerX}`)
+          : alert(`Winner is ${playerO}`);
         window.location.reload();
-      } 
-      
-      else if (totalMoves === 9) {
+      } else if (totalMoves === 9) {
         alert("Match Drawn");
         window.location.reload();
       }
@@ -29,9 +30,9 @@ export default function GameBoard() {
   function winner() {
     let filled = [
       [1, 4, 7],
+      [0, 3, 6],
       [2, 5, 8],
       [0, 4, 8],
-      [0, 3, 6],
       [2, 4, 6],
       [0, 1, 2],
       [3, 4, 5],
@@ -50,10 +51,7 @@ export default function GameBoard() {
   return (
     <div className="game-container">
       <h1>TIC TIC TOE</h1>
-      <div
-        className="gameBoard"
-        onClick={(e) => clicked(e)}
-      >
+      <div className="gameBoard" onClick={clicked}>
         <div className="box" id="0"></div>
         <div className="box" id="1"></div>
         <div className="box" id="2"></div>
