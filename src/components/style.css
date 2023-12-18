@@ -91,3 +91,38 @@
 .player>button:hover{
     background-color: lightgreen;
 }
+
+.winnerScreen{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* display: none; */
+    background-color: #73f373;
+    border-radius: 12px;
+    font-family: cursive;
+}
+
+.Buttons>button{
+    padding: 4px;
+    width: 100px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+    font-family: cursive;
+    background-color: #e0f0e0;
+}
+
+.Buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Buttons>button:hover{
+    background-color: lightblue;
+}

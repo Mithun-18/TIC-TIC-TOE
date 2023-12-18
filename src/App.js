@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
+import WinnerAnnounce from "./components/WinnerAnnounce";
 
 function App() {
   const [showGame, setShowGame] = useState(false);
@@ -20,6 +21,7 @@ function App() {
       ) : (
         <GameBoard playerX={playerX} playerO={playerO} />
       )}
+      {/* <WinnerAnnounce/> */}
     </div>
   );
 }

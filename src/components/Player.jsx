@@ -1,4 +1,3 @@
-import GameBoard, { pNames } from "./GameBoard";
 
 export default function Player({ showgame }) {
   return (

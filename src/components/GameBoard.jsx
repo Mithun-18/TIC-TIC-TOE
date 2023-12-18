@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./style.css";
+import WinnerAnnounce from "./WinnerAnnounce";
 
 let arr = Array(9).fill("");
 let totalMoves = 0;
 
 export default function GameBoard({ playerX, playerO }) {
-  console.log(playerX, playerO);
   let [turn, setTurn] = useState("X");
+  const [winnerName, setWinnerName] = useState("");
 
   function clicked(e) {
     if (arr[parseInt(e.target.id)] === "") {
@@ -16,13 +17,11 @@ export default function GameBoard({ playerX, playerO }) {
       totalMoves++;
       let win = winner();
       if (win) {
-        win === "X"
-          ? alert(`Winner is ${playerX}`)
-          : alert(`Winner is ${playerO}`);
-        window.location.reload();
+        setWinnerName(
+          win === "X" ? `Winner is ${playerX} ` : `Winner is ${playerO}`
+        );
       } else if (totalMoves === 9) {
-        alert("Match Drawn");
-        window.location.reload();
+        setWinnerName("Match drawn");
       }
     }
   }
@@ -48,20 +47,44 @@ export default function GameBoard({ playerX, playerO }) {
     }
   }
 
+  function reload() {
+    let collection = document.getElementsByClassName("box");
+    for (let i = 0; i < collection.length; i++) {
+      collection[i].innerHTML = "";
+    }
+    setWinnerName("");
+    arr.fill("");
+    totalMoves = 0;
+  }
+
   return (
-    <div className="game-container">
-      <h1>TIC TIC TOE</h1>
-      <div className="gameBoard" onClick={clicked}>
-        <div className="box" id="0"></div>
-        <div className="box" id="1"></div>
-        <div className="box" id="2"></div>
-        <div className="box" id="3"></div>
-        <div className="box" id="4"></div>
-        <div className="box" id="5"></div>
-        <div className="box" id="6"></div>
-        <div className="box" id="7"></div>
-        <div className="box" id="8"></div>
+    <>
+      <div
+        style={{
+          height: "100vh",
+          filter: winnerName === "" ? "blur(0px)" : "blur(2px)",
+        }}
+      >
+        <div className="game-container">
+          <h1>TIC TIC TOE</h1>
+          <div className="gameBoard" onClick={clicked}>
+            <div className="box" id="0"></div>
+            <div className="box" id="1"></div>
+            <div className="box" id="2"></div>
+            <div className="box" id="3"></div>
+            <div className="box" id="4"></div>
+            <div className="box" id="5"></div>
+            <div className="box" id="6"></div>
+            <div className="box" id="7"></div>
+            <div className="box" id="8"></div>
+          </div>
+        </div>
       </div>
-    </div>
+      {winnerName === "" ? (
+        <></>
+      ) : (
+        <WinnerAnnounce winnerName={winnerName} reload={reload} />
+      )}
+    </>
   );
 }
