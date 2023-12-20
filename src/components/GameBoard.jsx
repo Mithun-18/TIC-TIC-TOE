@@ -4,24 +4,66 @@ import WinnerAnnounce from "./WinnerAnnounce";
 
 let arr = Array(9).fill("");
 let totalMoves = 0;
+// let cputurn = false;
 
 export default function GameBoard({ playerX, playerO }) {
-  let [turn, setTurn] = useState("X");
+  // let [turn, setTurn] = useState("X");
+  let turn = "X";
   const [winnerName, setWinnerName] = useState("");
+  const [cputurn, setcputurn] = useState(false);
+
+  if (playerX === "") playerX = "player X";
+  if (playerO === "") playerO = "player O";
+
+  function WinnerCheking() {
+    let win = winner();
+    if (win) {
+      setWinnerName(
+        win === "X" ? `Winner is ${playerX} ` : `Winner is ${playerO}`
+      );
+    } else if (totalMoves === 9) {
+      setWinnerName("Match drawn");
+    }
+  }
 
   function clicked(e) {
     if (arr[parseInt(e.target.id)] === "") {
       e.target.innerHTML = turn === "X" ? "X" : "O";
       arr[parseInt(e.target.id)] = turn;
-      turn === "X" ? setTurn("O") : setTurn("X");
+      // turn === "X" ? setTurn("O") : setTurn("X");
+      turn === "X" ? (turn = "O") : (turn = "X");
       totalMoves++;
-      let win = winner();
-      if (win) {
-        setWinnerName(
-          win === "X" ? `Winner is ${playerX} ` : `Winner is ${playerO}`
-        );
-      } else if (totalMoves === 9) {
-        setWinnerName("Match drawn");
+      WinnerCheking();
+      console.log(arr);
+      setcputurn(true);
+      // cputurn = true;
+      cpuMove();
+    }
+  }
+  // console.log(cputurn);
+  // if (cputurn) {
+  //   cpuMove();
+  //   console.log("cpu turn");
+  // }
+
+  function cpuMove() {
+    if (cputurn) {
+      let x;
+      do {
+        x = parseInt(Math.random() * 8);
+      } while (arr[x] !== "");
+
+      if (arr[x] === "") {
+        document.getElementById(x.toString()).innerHTML =
+          turn === "X" ? "X" : "O";
+        arr[x] = turn;
+        // turn === "X" ? setTurn("O") : setTurn("X");
+        turn === "X" ? (turn = "O") : (turn = "X");
+        totalMoves++;
+        WinnerCheking();
+        console.log(arr);
+        // cputurn = false;
+        setcputurn(true);
       }
     }
   }
@@ -66,7 +108,7 @@ export default function GameBoard({ playerX, playerO }) {
         }}
       >
         <div className="game-container">
-          <h1>TIC TIC TOE</h1>
+          <h1 className="gameHeading">TIC TIC TOE</h1>
           <div className="gameBoard" onClick={clicked}>
             <div className="box" id="0"></div>
             <div className="box" id="1"></div>

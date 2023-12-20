@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      {!showGame ? (
+      {/* {!showGame ? (
         <Player
           showgame={(pX, pO) => {
             setPlayerX(pX);
@@ -21,7 +21,9 @@ function App() {
       ) : (
         <GameBoard playerX={playerX} playerO={playerO} />
       )}
-      {/* <WinnerAnnounce/> */}
+      <WinnerAnnounce/> */}
+
+      <GameBoard/>
     </div>
   );
 }
