@@ -4,66 +4,63 @@ import WinnerAnnounce from "./WinnerAnnounce";
 
 let arr = Array(9).fill("");
 let totalMoves = 0;
-// let cputurn = false;
+let cputurn = false;
+let turn = "X";
 
-export default function GameBoard({ playerX, playerO }) {
-  // let [turn, setTurn] = useState("X");
-  let turn = "X";
+export default function GameBoard({ playerX, playerO, multiplayer }) {
   const [winnerName, setWinnerName] = useState("");
-  const [cputurn, setcputurn] = useState(false);
 
   if (playerX === "") playerX = "player X";
   if (playerO === "") playerO = "player O";
-
+  playerX = `Winner is ${playerX} `;
+  playerO = `Winner is ${playerO}`;
+  
   function WinnerCheking() {
     let win = winner();
     if (win) {
-      setWinnerName(
-        win === "X" ? `Winner is ${playerX} ` : `Winner is ${playerO}`
-      );
+      setWinnerName(win === "X" ? playerX : playerO);
     } else if (totalMoves === 9) {
       setWinnerName("Match drawn");
     }
   }
 
   function clicked(e) {
-    if (arr[parseInt(e.target.id)] === "") {
+    if (arr[parseInt(e.target.id)] === "" && !cputurn) {
       e.target.innerHTML = turn === "X" ? "X" : "O";
       arr[parseInt(e.target.id)] = turn;
-      // turn === "X" ? setTurn("O") : setTurn("X");
       turn === "X" ? (turn = "O") : (turn = "X");
       totalMoves++;
       WinnerCheking();
-      console.log(arr);
-      setcputurn(true);
-      // cputurn = true;
-      cpuMove();
+      cputurn = true;
+      if (!multiplayer) setTimeout(()=>{cpuMove();},600);
     }
   }
-  // console.log(cputurn);
-  // if (cputurn) {
-  //   cpuMove();
-  //   console.log("cpu turn");
-  // }
-
+  
   function cpuMove() {
-    if (cputurn) {
+    if (cputurn && totalMoves !== 9) {
       let x;
       do {
         x = parseInt(Math.random() * 8);
       } while (arr[x] !== "");
-
       if (arr[x] === "") {
         document.getElementById(x.toString()).innerHTML =
           turn === "X" ? "X" : "O";
         arr[x] = turn;
-        // turn === "X" ? setTurn("O") : setTurn("X");
+        turn === "X" ? (
+          ()=>{
+              playerX="System won the game";
+              playerO = "You won the game";
+          }
+        )()  :(
+          ()=>{
+              playerO="System won the game";
+              playerX = "You won the game";
+          }
+        )() ;
         turn === "X" ? (turn = "O") : (turn = "X");
         totalMoves++;
         WinnerCheking();
-        console.log(arr);
-        // cputurn = false;
-        setcputurn(true);
+        cputurn = false;
       }
     }
   }

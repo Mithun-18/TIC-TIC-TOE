@@ -1,10 +1,10 @@
-.gameBoard{
+.gameBoard {
     width: 320px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.box{
+.box {
     border: 1px solid black;
     width: 100px;
     height: 100px;
@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.gameHeading{
+.gameHeading {
     font-family: cursive;
     font-size: 48px;
 }
@@ -29,27 +29,30 @@
 .box:nth-child(-n+3) {
     border-top: 0;
 }
+
 .box:nth-child(3n) {
     border-right: 0;
 }
 
-.box:nth-child(7),.box:nth-child(8),.box:nth-child(9){
+.box:nth-child(7),
+.box:nth-child(8),
+.box:nth-child(9) {
     border-bottom: 0;
 }
 
-.box:hover{
+.box:hover {
     background-color: #eee;
 }
 
 
-.game-container{
+.game-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.player{
+.player {
     height: 300px;
     width: -moz-fit-content;
     width: fit-content;
@@ -63,14 +66,14 @@
 
 }
 
-.playerContainer{
+.playerContainer {
     display: flex;
     justify-content: center;
     height: 512px;
     align-items: center;
 }
 
-.player>input{
+.player>input {
     padding: 16px;
     width: 200px;
     border-radius: 24px;
@@ -79,7 +82,7 @@
     font-family: cursive;
 }
 
-.player>button{
+.player>button {
     padding: 12px;
     width: 130px;
     border-radius: 18px;
@@ -89,16 +92,16 @@
     background-color: #e0f0e0;
 }
 
-.player>input:hover{
+.player>input:hover {
     background-color: #eee;
 }
 
 
-.player>button:hover{
+.player>button:hover ,.player-selectmode>button:hover{
     background-color: lightgreen;
 }
 
-.winnerScreen{
+.winnerScreen {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -113,7 +116,7 @@
     font-family: cursive;
 }
 
-.Buttons>button{
+.Buttons>button {
     padding: 4px;
     width: 100px;
     border-radius: 12px;
@@ -123,12 +126,36 @@
     background-color: #e0f0e0;
 }
 
-.Buttons{
+.Buttons {
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.Buttons>button:hover{
+.Buttons>button:hover {
     background-color: lightblue;
+}
+
+.player-selectmode {
+    height: 300px;
+    width: -moz-fit-content;
+    width: 320px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #f0e4e4;
+    background-color: #ecf7f7;
+    box-shadow: 16px 12px 16px 12px darkgrey;
+}
+
+.player-selectmode>button {
+    padding: 12px;
+    width: 220px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-family: cursive;
+    background-color: #e0f0e0;
 }
