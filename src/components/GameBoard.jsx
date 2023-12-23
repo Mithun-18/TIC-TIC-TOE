@@ -2,19 +2,19 @@ import { useState } from "react";
 import "./style.css";
 import WinnerAnnounce from "./WinnerAnnounce";
 
-let arr = Array(9).fill("");
-let totalMoves = 0;
-let cputurn = false;
-let turn = "X";
-
 export default function GameBoard({ playerX, playerO, multiplayer }) {
+  let arr = Array(9).fill("");
+  let cputurn = false;
+  let totalMoves = 0;
+  let turn = "X";
+
   const [winnerName, setWinnerName] = useState("");
 
   if (playerX === "") playerX = "player X";
   if (playerO === "") playerO = "player O";
   playerX = `Winner is ${playerX} `;
   playerO = `Winner is ${playerO}`;
-  
+
   function WinnerCheking() {
     let win = winner();
     if (win) {
@@ -31,32 +31,34 @@ export default function GameBoard({ playerX, playerO, multiplayer }) {
       turn === "X" ? (turn = "O") : (turn = "X");
       totalMoves++;
       WinnerCheking();
-      cputurn = true;
-      if (!multiplayer) setTimeout(()=>{cpuMove();},600);
+      if (totalMoves !== 9) cputurn = true;
+      if (!multiplayer)
+        setTimeout(() => {
+          cpuMove();
+        }, 600);
     }
   }
-  
+
   function cpuMove() {
     if (cputurn && totalMoves !== 9) {
       let x;
       do {
+        console.log("hrew", arr, x);
         x = parseInt(Math.random() * 8);
       } while (arr[x] !== "");
       if (arr[x] === "") {
         document.getElementById(x.toString()).innerHTML =
           turn === "X" ? "X" : "O";
         arr[x] = turn;
-        turn === "X" ? (
-          ()=>{
-              playerX="System won the game";
+        turn === "X"
+          ? (() => {
+              playerX = "System won the game";
               playerO = "You won the game";
-          }
-        )()  :(
-          ()=>{
-              playerO="System won the game";
+            })()
+          : (() => {
+              playerO = "System won the game";
               playerX = "You won the game";
-          }
-        )() ;
+            })();
         turn === "X" ? (turn = "O") : (turn = "X");
         totalMoves++;
         WinnerCheking();
@@ -94,6 +96,7 @@ export default function GameBoard({ playerX, playerO, multiplayer }) {
     setWinnerName("");
     arr.fill("");
     totalMoves = 0;
+    turn = "X";
   }
 
   return (
