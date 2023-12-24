@@ -1,18 +1,22 @@
-export default function WinnerAnnounce({ winnerName ,reload}) {
+export default function WinnerAnnounce({ winTitle, playAgain, goBack }) {
   return (
     <div className="winnerScreen">
-      <h2>{winnerName}</h2>
+      <h2>{winTitle}</h2>
       <div className="Buttons">
         <button
           onClick={() => {
-            window.location.reload();
+            goBack?.();
           }}
         >
           Back
         </button>
-        <button onClick={()=>{
-            reload();
-        }}>play Again</button>
+        <button
+          onClick={() => {
+            playAgain?.();
+          }}
+        >
+          play Again
+        </button>
       </div>
     </div>
   );
